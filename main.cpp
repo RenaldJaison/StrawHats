@@ -1,65 +1,61 @@
 #include <iostream>
 using namespace std;
 
-class Sleeping_Stu
+class Attendance
 {
-    string name;
-    int rollNo;
-    int energy;
+    string subject;
+    int totalStu;
+    int presentStu;
+    float p;
 
 public:
-    Sleeping_Stu()
+    Attendance()
     {
-        cout << "Enter Name : ";
-        cin >> name;
-
-        cout << "Enter Roll Number : ";
-        cin >> rollNo;
-
-        cout << "Enter Energy Level : ";
-        cin >> energy;
+        totalStu = 65;
+        p = 0;
     }
 
-    void attendClass()
+    void MarkAttendance()
     {
-        energy = energy - 20;
+        cout << "Enter the number of students present out of " << totalStu << ": ";
+        cin >> presentStu;
+
+        if (presentStu < 0 || presentStu > totalStu)
+        {
+            cout << "Invalid number of students!" << endl;
+            exit(0);
+        }
     }
 
-    void drinkCoffee()
+    void CalAttenPercentage()
     {
-        energy = energy + 25;
+        p = (presentStu / (float)totalStu) * 100;
+
+        cout << "Attendance Percentage: " << p << "%" << endl;
     }
 
-    void sleep()
+    void CheckAtten()
     {
-        energy = 100;
-    }
-
-    void displayStatus()
-    {
-        cout << "Name : " << name << endl;
-        cout << "Roll Number : " << rollNo << endl;
-        cout << "Energy Level : " << energy << endl;
-
-        if (energy > 0)
-            cout << "Student survived three classes without sleeping." << endl;
+        if (p >= 75.0)
+        {
+            cout << "Attendance Percentage: " << p
+                 << "%. You are Eligible." << endl;
+        }
         else
-            cout << "Student fell asleep." << endl;
+        {
+            cout << "Attendance Percentage: " << p
+                 << "%. You are Not Eligible!" << endl;
+        }
     }
 };
 
 int main()
 {
-    Sleeping_Stu s;
+    Attendance a;
 
-    s.sleep();
-    s.attendClass();
-    s.drinkCoffee();
-    s.attendClass();
-    s.attendClass();
-
-
-    s.displayStatus();
+    a.MarkAttendance();
+    a.CalAttenPercentage();
+    a.CheckAtten();
 
     return 0;
 }
