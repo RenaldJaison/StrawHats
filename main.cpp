@@ -1,61 +1,65 @@
 #include <iostream>
 using namespace std;
 
-class Attendance
+class Sleeping_Stu
 {
-    string subject;
-    int totalStu;
-    int presentStu;
-    float p;
+    string name;
+    int rollNo;
+    int energy;
 
 public:
-    Attendance()
+    Sleeping_Stu()
     {
-        totalStu = 65;
-        p = 0;
+        cout << "Enter Name : ";
+        cin >> name;
+
+        cout << "Enter Roll Number : ";
+        cin >> rollNo;
+
+        cout << "Enter Energy Level : ";
+        cin >> energy;
     }
 
-    void MarkAttendance()
+    void attendClass()
     {
-        cout << "Enter the number of students present out of " << totalStu << ": ";
-        cin >> presentStu;
-
-        if (presentStu < 0 || presentStu > totalStu)
-        {
-            cout << "Invalid number of students!" << endl;
-            exit(0);
-        }
+        energy = energy - 20;
     }
 
-    void CalAttenPercentage()
+    void drinkCoffee()
     {
-        p = (presentStu / (float)totalStu) * 100;
-
-        cout << "Attendance Percentage: " << p << "%" << endl;
+        energy = energy + 25;
     }
 
-    void CheckAtten()
+    void sleep()
     {
-        if (p >= 75.0)
-        {
-            cout << "Attendance Percentage: " << p
-                 << "%. You are Eligible." << endl;
-        }
+        energy = 100;
+    }
+
+    void displayStatus()
+    {
+        cout << "Name : " << name << endl;
+        cout << "Roll Number : " << rollNo << endl;
+        cout << "Energy Level : " << energy << endl;
+
+        if (energy > 0)
+            cout << "Student survived three classes without sleeping." << endl;
         else
-        {
-            cout << "Attendance Percentage: " << p
-                 << "%. You are Not Eligible!" << endl;
-        }
+            cout << "Student fell asleep." << endl;
     }
 };
 
 int main()
 {
-    Attendance a;
+    Sleeping_Stu s;
 
-    a.MarkAttendance();
-    a.CalAttenPercentage();
-    a.CheckAtten();
+    s.sleep();
+    s.attendClass();
+    s.drinkCoffee();
+    s.attendClass();
+    s.attendClass();
+
+
+    s.displayStatus();
 
     return 0;
 }
